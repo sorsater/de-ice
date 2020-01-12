@@ -16,7 +16,7 @@ class Forecaster():
         self.forecasts = {}
         
         self.location = ''
-        self.forecast_file_name = 'forecasts.json'
+        self.forecast_file_name = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'forecasts.json')
         
         self.parse_page()
         self.read_location()
