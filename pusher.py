@@ -3,7 +3,7 @@
 
 import json
 import datetime
-import http
+import http.client
 from urllib.parse import urlencode
 import time
 
@@ -43,7 +43,7 @@ class Pusher():
         forecasts = json.load(open(self.forecast_file_name))
         for timestamp, content in forecasts.items():
             timestamp_date = timestamp.split('T')[0]
-            if today == timestamp_date:
+            if self.today == timestamp_date:
                 self.forecasts_today.append(content)
 
     def read_temperatures(self):
