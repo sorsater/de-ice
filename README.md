@@ -23,10 +23,10 @@ Set up your pushover credentials in the file ```credentials.json``` from you pus
 My setup is to run this on my raspberry pi.
 
 One for ```forecaster.py``` that for me runs every hour   
-```@hourly python3 ./home/pi/projects/de-ice/forecaster.py```
+```@hourly python3 /home/pi/projects/de-ice/forecaster.py```
 
 One for ```pusher.py``` that runs at wanted time. For me at 6:00 every day   
-```0 6 * * * python3 ./home/pi/projects/de-ice/pusher.py```
+```0 6 * * * python3 /home/pi/projects/de-ice/pusher.py```
 
 
 ## Contact
