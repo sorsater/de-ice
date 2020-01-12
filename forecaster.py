@@ -71,6 +71,6 @@ class Forecaster():
         json.dump(self.forecasts, open(self.forecast_file_name, 'w'), indent=True, sort_keys=True)
 
 
-def __main__():
+if __name__ == "__main__":
     print('Running forecast')
     forecast = Forecaster('https://www.yr.no/place/Sweden/J%C3%B6nk%C3%B6ping/Eksj%C3%B6')
