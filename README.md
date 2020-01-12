@@ -10,6 +10,10 @@ Then at wanted time, the script ```pusher.py``` processes the forecasts, checks 
 Depending if the temperatures has been below 0 degrees celsius, the script pushes to a [Pushover](https://pushover.net/) app.
 
 ## Setup
+Python external dependencies are ```xmltodict```.
+Can be installed with pip:   
+```pip3 install xmltodict```
+
 ### Credentials
 Set up your pushover credentials in the file ```credentials.json``` from you pushover app.
 
