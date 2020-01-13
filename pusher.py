@@ -14,7 +14,7 @@ class Pusher():
         self.num_hours = num_hours
         self.today = str(datetime.date.today())
         self.forecast_file_name = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'forecasts.json')
-        self.credentials_file = 'credentials.json'
+        self.credentials_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'credentials.json')
         
         self.API_TOKEN = None
         self.USER_TOKEN = None
