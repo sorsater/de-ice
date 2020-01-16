@@ -38,6 +38,9 @@ class Pusher():
         credentials = json.load(open(self.credentials_file))
         self.API_TOKEN = credentials['API_TOKEN']
         self.USER_TOKEN = credentials['USER_TOKEN']
+
+        if self.API_TOKEN == 'API_TOKEN':
+            raise ValueError('You need to setup your own credentials in credentials.json')
         
     def read_todays_forecasts(self):
         print('Reading forecast for today')
