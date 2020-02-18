@@ -12,7 +12,9 @@ import os
 class Pusher():
     def __init__(self, num_hours=8):
         self.num_hours = num_hours
+        # Get current date and hour
         self.today = str(datetime.date.today())
+        self.hour = datetime.datetime.now().hour
         self.forecast_file_name = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'forecasts.json')
         self.credentials_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'credentials.json')
         
@@ -24,6 +26,8 @@ class Pusher():
         
         self.coldest = None
         self.msg = ''
+        self.temps = []
+        self.recent_hours = []
         
         self.read_todays_forecasts()
         self.read_temperatures()
@@ -53,18 +57,18 @@ class Pusher():
     def read_temperatures(self):
         print('Read temperatures')
         for forecast in self.forecasts_today:
-            start_time = forecast['from'].split('T')[1]
+            start_time = int(forecast['from'].split('T')[1].split(':')[0])
             temp = int(forecast['temp'])
-            self.temps_today.append([start_time, temp])
+            if start_time <= self.hour:
+                self.temps_today.append([start_time, temp])
             
     def get_coldest_temp(self):
         print('Get coldest temp')
         self.temps_today.sort(reverse=True)
 
-        recent_hours = self.temps_today[:self.num_hours]
-        temps = [temp for timestamp, temp in recent_hours]
-
-        self.coldest = min(temps)
+        self.recent_hours = self.temps_today[:self.num_hours]
+        self.temps = [temp for timestamp, temp in self.recent_hours]
+        self.coldest = min(self.temps)
         
     def create_msg(self):
         print('Create message')
@@ -74,6 +78,9 @@ class Pusher():
         else:
             # Blush emoji, car emoji, degree sign
             self.msg = r'&#x263A &#x1F697, {}&#186;'.format(self.coldest)
+
+        # self.msg += '\n'.join(map(str, self.recent_hours))
+        print(self.msg)
         
     def push(self):
         print('Trying to push!')
